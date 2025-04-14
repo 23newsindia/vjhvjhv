@@ -1,0 +1,643 @@
+/* ======================
+   PART 1: BASE STYLES & CAROUSEL CONTAINER
+   ====================== */
+
+/* Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Base Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0 solid #e5e7eb;
+}
+
+/* Custom Font Face */
+@font-face {
+  font-family: 'BaseNeueTrial';
+  src: local('BaseNeueTrial'), 
+       url('https://www.bewakoof.com/font/BaseNeueTrial-SuperExpBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Body Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #ffffff;
+  color: #363537;
+  line-height: 1.5;
+}
+
+/* Main Carousel Wrapper */
+.oc-carousel-wrapper {
+  padding: 24px 0 16px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  background-image: url('https://images.bewakoof.com/web/bg-offers-zone.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Carousel Title */
+.oc-carousel-title {
+  font-family: 'BaseNeueTrial', sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.64px;
+  color: #000000;
+  text-transform: uppercase;
+  margin-left: 16px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Carousel Container */
+.oc-carousel-container {
+  position: relative;
+  width: 100%;
+  height: 220px; /* Fixed height for consistent layout */
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+/* ======================
+   PART 2: SLIDE STYLING & 3D EFFECTS
+   ====================== */
+
+/* Slide Base Styles */
+.oc-slide {
+  position: absolute;
+  width: 200px;
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* Active Slide (Center) */
+.oc-slide.active {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+  z-index: 3;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+/* Previous Slide (Left) */
+.oc-slide.prev {
+  transform: rotateY(25deg) translateX(-55%) scale(0.85);
+  opacity: 0.7;
+  z-index: 2;
+}
+
+/* Next Slide (Right) */
+.oc-slide.next {
+  transform: rotateY(-25deg) translateX(55%) scale(0.85);
+  opacity: 0.7;
+  z-index: 2;
+}
+
+/* Far Slides (Hidden) */
+.oc-slide:not(.active):not(.prev):not(.next) {
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Coupon Card Container */
+.oc-coupon {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  background: white;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Coupon Image Container */
+.oc-coupon-container {
+  position: relative;
+  height: 100px;
+  overflow: hidden;
+}
+
+/* Coupon Background Image */
+.oc-coupon-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* Hover Effects */
+.oc-slide.active:hover .oc-coupon-bg {
+  transform: scale(1.05);
+}
+
+/* Top Cut Design */
+.oc-coupon-cuts.top {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+}
+
+.oc-top-cut {
+  position: relative;
+  height: 100%;
+  background: white;
+}
+
+.oc-top-cut:before,
+.oc-top-cut:after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  top: 0;
+  background: linear-gradient(to bottom, #fff, #e4edff);
+}
+
+.oc-top-cut:before {
+  left: -12px;
+}
+
+.oc-top-cut:after {
+  right: -12px;
+}
+
+
+/* ======================
+   PART 3: CONTENT & BUTTON STYLING
+   ====================== */
+
+/* Coupon Content Area */
+.oc-coupon-content {
+  position: absolute;
+  top: 24px;
+  width: 100%;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+/* Offer Title */
+.oc-coupon-title {
+  font-family: 'BaseNeueTrial', sans-serif;
+  font-size: 1rem;
+  line-height: 1.2;
+  color: #000;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* Offer Subtitle */
+.oc-coupon-subtitle {
+  font-size: 0.75rem;
+  line-height: 1.3;
+  color: #333;
+  text-align: center;
+  font-weight: 400;
+  max-width: 90%;
+}
+
+/* Center Cut (Perforation) */
+.oc-center-cut {
+  position: relative;
+  height: 1px;
+  background: transparent;
+  margin: 8px 0;
+}
+
+.oc-center-cut:before,
+.oc-center-cut:after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: radial-gradient(circle, #e4edff, #fff, #e4edff);
+}
+
+.oc-center-cut:before {
+  left: -8px;
+}
+
+.oc-center-cut:after {
+  right: -8px;
+}
+
+/* Shop Now Button */
+.oc-coupon-button {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  background: #FFD632;
+  border: none;
+  color: #000;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Button Text Container */
+.oc-cta-text {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+/* Button Shine Effect */
+.oc-coupon-button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.5) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  transform: skewX(-20deg);
+}
+
+/* Active Shine Animation */
+.oc-shine-effect:before {
+  animation: shine 1.5s ease infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 150%; }
+}
+
+/* Bottom Cut Design */
+.oc-coupon-cuts.bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 6px;
+}
+
+.oc-bottom-cut {
+  position: relative;
+  height: 100%;
+}
+
+/* Dotted Line */
+.oc-bottom-cut span {
+  position: absolute;
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  top: 0;
+  transform: translateY(-50%);
+  background: linear-gradient(to top, #fff, #e4edff);
+}
+
+/* Position each dot */
+.oc-bottom-cut span:nth-child(1) { left: 12%; }
+.oc-bottom-cut span:nth-child(2) { left: 24%; }
+.oc-bottom-cut span:nth-child(3) { left: 36%; }
+.oc-bottom-cut span:nth-child(4) { left: 48%; }
+.oc-bottom-cut span:nth-child(5) { left: 60%; }
+.oc-bottom-cut span:nth-child(6) { left: 72%; }
+.oc-bottom-cut span:nth-child(7) { left: 84%; }
+
+
+/* ======================
+   PART 4: NAVIGATION & RESPONSIVE STYLES
+   ====================== */
+
+/* Navigation Arrows */
+.oc-carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  border: none;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.oc-carousel-nav:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.oc-carousel-nav.prev {
+  left: 15px;
+}
+
+.oc-carousel-nav.next {
+  right: 15px;
+}
+
+/* Pagination Dots */
+.oc-carousel-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.oc-carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.oc-carousel-dot.active {
+  background: #000;
+  transform: scale(1.2);
+}
+
+/* Bottom Strip with Stars */
+.oc-bottom-strip-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.oc-bottom-strip {
+  position: relative;
+  min-width: 190px;
+  height: 24px;
+  padding: 4px 16px;
+  background: #f4f8fb;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  z-index: 5;
+}
+
+/* Animated Border Effect */
+.oc-bottom-strip:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 40px;
+  padding: 1px;
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    transparent 0deg,
+    #8fbdda 180deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, 
+               linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: rotateBorder 4s linear infinite;
+}
+
+@keyframes rotateBorder {
+  to { transform: rotate(1turn); }
+}
+
+/* Decorative Stars */
+.oc-stars-left,
+.oc-stars-right {
+  position: absolute;
+  z-index: 4;
+}
+
+.oc-stars-left {
+  left: 40px;
+}
+
+.oc-stars-right {
+  right: 40px;
+}
+
+.oc-stars-left svg,
+.oc-stars-right svg {
+  width: 24px;
+  height: 24px;
+  opacity: 0.8;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .oc-carousel-container {
+    height: 200px;
+    perspective: 800px;
+  }
+
+  .oc-slide {
+    width: 180px;
+  }
+
+  .oc-slide.prev {
+    transform: translateX(-65%) scale(0.8);
+  }
+
+  .oc-slide.next {
+    transform: translateX(65%) scale(0.8);
+  }
+
+  .oc-carousel-nav {
+    width: 36px;
+    height: 36px;
+  }
+
+  .oc-stars-left {
+    left: 20px;
+  }
+
+  .oc-stars-right {
+    right: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .oc-carousel-wrapper {
+    border-radius: 16px;
+  }
+
+  .oc-carousel-container {
+    height: 180px;
+  }
+
+  .oc-slide {
+    width: 160px;
+  }
+
+  .oc-slide.prev {
+    transform: translateX(-75%) scale(0.75);
+    opacity: 0.5;
+  }
+
+  .oc-slide.next {
+    transform: translateX(75%) scale(0.75);
+    opacity: 0.5;
+  }
+
+  .oc-carousel-title {
+    font-size: 1.1rem;
+    margin-left: 12px;
+  }
+
+  .oc-bottom-strip {
+    min-width: 160px;
+    font-size: 0.65rem;
+  }
+
+  .oc-stars-left,
+  .oc-stars-right {
+    display: none;
+  }
+}
+
+/* ======================
+   PART 5: FINAL TOUCHES & ANIMATIONS
+   ====================== */
+
+/* Micro-interactions */
+.oc-coupon-button:hover {
+  background: #ffcc00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.oc-coupon-button:active {
+  transform: translateY(0);
+}
+
+/* Focus States (Accessibility) */
+.oc-carousel-nav:focus,
+.oc-carousel-dot:focus,
+.oc-coupon-button:focus {
+  outline: 2px solid #207BB4;
+  outline-offset: 2px;
+}
+
+/* Loading Animation */
+.oc-coupon-bg:not(.loaded) {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Entry Animations */
+.oc-carousel-wrapper {
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Slide Transition Enhancement */
+.oc-slide {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.4s linear,
+              z-index 0.1s step-end;
+}
+
+/* Print Optimization */
+@media print {
+  .oc-carousel-wrapper {
+    background-image: none !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+  
+  .oc-carousel-nav,
+  .oc-bottom-strip:before {
+    display: none !important;
+  }
+  
+  .oc-slide {
+    position: relative !important;
+    transform: none !important;
+    opacity: 1 !important;
+    margin: 10px !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .oc-shine-effect:before {
+    animation: none !important;
+  }
+}
+
+/* IE11 Fallbacks */
+_:-ms-lang(x), .oc-carousel-container {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+_:-ms-lang(x), .oc-slide {
+  display: inline-block;
+  vertical-align: top;
+  position: static;
+  transform: none !important;
+}
+
+_:-ms-lang(x), .oc-bottom-strip:before {
+  display: none;
+}
